@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 60px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 50px;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(255, 0, 255, 0.3);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 300;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        nav a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
+        }
+
+        /* HOME SECTION */
+        #home {
+            padding: 0;
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+            position: relative;
+            background: #0a0a0a;
+        }
+
+        .banner {
+            width: 100%;
+            height: 75vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.2);
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.4), rgba(0, 255, 255, 0.4));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .banner-text {
+            text-align: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .banner-text h1 {
+            font-size: 5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff;
+        }
+
+        .banner-text p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            opacity: 1;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            margin: 20px auto;
+            box-shadow: 0 0 10px #ff00ff;
+        }
+
+        /* OUR TALE SECTION */
+        #tale {
+            background: #0a0a0a;
+            padding: 120px 20px;
+        }
+
+        .tale-content {
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .tale-content h2 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px #ff00ff;
+        }
+
+        .tale-content .subtitle {
+            font-size: 1rem;
+            color: #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            font-family: 'Segoe UI', sans-serif;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .tale-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #ddd;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .highlight {
+            color: #ff00ff;
+            font-style: italic;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        /* MEMORIES SECTION */
+        #memories {
+            background: linear-gradient(135deg, #1a0033 0%, #001a33 100%);
+            padding: 120px 20px;
+        }
+
+        .memories-content {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .memories-content h2 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 70px;
+            color: #fff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        .gallery-minimal {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .gallery-card {
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+            box-shadow: 0 5px 30px rgba(255, 0, 255, 0.3);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0, 255, 255, 0.5), 0 0 30px rgba(255, 0, 255, 0.5);
+            border-color: #00ffff;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            filter: brightness(0.9);
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px 25px;
+                gap: 30px;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+            }
+
+            .banner-text h1 {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+
+            .banner-text p {
+                font-size: 1rem;
+                letter-spacing: 2px;
+            }
+
+            .tale-content h2,
+            .memories-content h2 {
+                font-size: 2rem;
+            }
+
+            .tale-content p {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .gallery-minimal {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            #tale,
+            #memories {
+                padding: 80px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .banner-text h1 {
+                font-size: 2rem;
+            }
+
+            .gallery-minimal {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a onclick="scrollToSection('home')">Home</a>
+        <a onclick="scrollToSection('tale')">Our Tale</a>
+        <a onclick="scrollToSection('memories')">Memories</a>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section id="home">
+        <div class="banner">
+            <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=1600" alt="Birthday Banner">
+            <div class="banner-overlay">
+                <div class="banner-text">
+                    <h1>Happy Birthday</h1>
+                    <div class="divider"></div>
+                    <p>To someone extraordinary</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR TALE SECTION -->
+    <section id="tale">
+        <div class="tale-content">
+            <div class="subtitle">How We Met</div>
+            <h2>Our Tale</h2>
+            <p>
+                It began with a serendipitous moment—a reply to a <span class="highlight">dot cafe Instagram story</span>. You were tagged in that photo, a simple shoutout that would become the beginning of something beautiful.
+            </p>
+            <p>
+                What started as a casual message evolved into meaningful conversations, shared dreams, and a connection that continues to grow with each passing day.
+            </p>
+            <p>
+                From strangers behind screens to the bond we share today, every moment has been a gift. Here's to the chance encounter that brought us together.
+            </p>
+        </div>
+    </section>
+
+    <!-- MEMORIES SECTION -->
+    <section id="memories">
+        <div class="memories-content">
+            <h2>Memories</h2>
+            <div class="gallery-minimal">
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1464047736614-af63643285bf?w=600" alt="Memory 1">
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947?w=600" alt="Memory 2">
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=600" alt="Memory 3">
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1502139214982-d0ad755818d8?w=600" alt="Memory 4">
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1523438097201-512ae7d59c44?w=600" alt="Memory 5">
+                </div>
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600" alt="Memory 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
